@@ -1,3 +1,3 @@
-RQST <GO> -- Work in Progress
+RQST &lt;GO&gt; -- Work in Progress
 
 Live link: https://rqst-go.herokuapp.com/
