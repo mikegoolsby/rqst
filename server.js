@@ -8,6 +8,8 @@ const express = require('express');
 const app = express();
 const mongoose = require("mongoose")
 
+const rqstRouter = require("./controllers/router")
+
 // Mongo setup
 mongoose.connect(`${MONGODB_URI}${DB_NAME}`, {
     useNewUrlParser: true,
@@ -26,9 +28,7 @@ app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 
 // Testing server //
-app.get('/', (req, res) => {
-    res.send('cleared the tower')
-})
+app.use('/rqst', rqstRouter)
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
