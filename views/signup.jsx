@@ -6,8 +6,8 @@ const Layout = require('./Layout')
 class Signup extends React.Component {
     render() {
         return (
-            <Layout title="Login to RQST">
-                <form>
+            <Layout title="Signup for RQST">
+                <form action="/rqst-go" method="POST">
                     <div class="form-group">
                         <label for="username" class="col-sm-2">Username</label>
                         <input type="email" class="form-control col-sm-2" id="username" aria-describedby="emailHelp" placeholder="Enter email"></input>
@@ -32,10 +32,10 @@ class Signup extends React.Component {
                             </div>
                         </div>
                     </fieldset>
-                </form>
                     <div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
+                </form>
             </Layout>
         )
     }

@@ -13,6 +13,22 @@ class Layout extends React.Component {
                 <header>
                     <h1>{this.props.title}</h1>
                 </header>
+                <div>
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link active text-info" href="/rqst-go/main">Existing Time Off Days</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-info" href="/rqst-go/new">Add New Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-info" href="#">Pending Requests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="/logout">Log Out</a>
+                    </li>
+                </ul>
+                </div>
                 <main>{this.props.children}</main>
             </body>
         </html>

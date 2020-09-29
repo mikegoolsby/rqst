@@ -7,7 +7,11 @@ const { MONGODB_URI, DB_NAME } = process.env;
 const express = require('express');
 const app = express();
 const mongoose = require("mongoose")
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const methodOverride = require('method-override');
 
+// Require rqst Router
 const rqstRouter = require("./controllers/router")
 
 // Mongo setup
@@ -20,14 +24,26 @@ mongoose.connection.once("open", () => {
     console.log("RQST is connected to Mongo")
 });
 
-// Require data model
-
-
 // Set view enginer to express-react-views
 app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 
-// Testing server //
+app.use(
+    session({
+      secret: SECRET,
+      resave: false,
+      saveUninitialized: true,
+      cookie: { secure: process.env.NODE_ENV === "production" },
+    })
+);
+
+
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
+
+
+// Server -> router
 app.use('/rqst-go', rqstRouter)
 
 app.listen(PORT, () => {
