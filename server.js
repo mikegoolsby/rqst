@@ -28,7 +28,7 @@ app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 
 // Testing server //
-app.use('/rqst', rqstRouter)
+app.use('/rqst-go', rqstRouter)
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
