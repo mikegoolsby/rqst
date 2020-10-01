@@ -23,6 +23,6 @@ const seedRequests = [
     }
 ]
 
-Request.create(seedRequests, (err, data) => {
-    console.log(data)
-})
+// Request.create(seedRequests, (err, data) => {
+//     console.log(data)
+// })

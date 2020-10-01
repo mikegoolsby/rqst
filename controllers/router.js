@@ -4,6 +4,10 @@ const User = require('../models/user')
 const router = Router();
 const bcrypt = require("bcryptjs");
 
+// Data
+const Request = require('../models/request')
+
+////// Auth Middleware //////
 
 // Signup
 router.get('/', (req, res) => {
@@ -12,12 +16,24 @@ router.get('/', (req, res) => {
 
 // Create new user POST request
 router.post("/", async (req, res) => {
-    // encrypting password
-    req.body.password = await bcrypt.hash(req.body.password, 10);
-    // Save new user to DB
-    const newUser = await User.create(req.body);
-    // Redirect back to login page
-    res.redirect('/login')
+    try {
+        console.log(req.body)
+        const user = {
+            username: req.body.username,
+            password: req.body.password,
+            isManager: req.body.gridRadios === "manager" ? true : false
+        }
+        console.log(user)
+        // encrypting password
+        user.password = await bcrypt.hash(req.body.password, 10);
+        console.log(req.body.password)
+        // Save new user to DB
+        const newUser = await User.create(user);
+        // Redirect back to login page
+        res.redirect('/rqst-go/login')
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 // Login page
@@ -48,7 +64,9 @@ router.post('/login', async (req, res) => {
             // Save info in session, user is logged in & username
             req.session.login = true
             req.session.username = user[0].username;
-            res.redirect('/');
+            req.session.password = user[0].password;
+            req.session.isManager = user[0].isManager;
+            res.redirect('/login');
         } else {
             // Redirect back to login page if failed
             res.render('fail');
@@ -74,6 +92,26 @@ router.post('/', (req, res) => {
     Request.create(req.body, (err, request) => {
         res.redirect('/')
     })
+    Request.create(req.body, (error, request) => {
+        res.redirect('/main')
+    })
+})
+
+// Pending
+router.get('/pending', (req, res) => {
+    res.render('pending')
+})
+// router.get('/pending/:id/approve', (req, res) => {
+//     Request.findById(req.params.id, (err, request) => {
+//         request.pending = false;
+//         Request.findByIdAndUpdate(req.params.id, request, () => {
+//             res.redirect('/pending')
+//         })
+//     })
+// })
+
+router.get('/approve', (req, res) => {
+    res.render('approve')
 })
 
 

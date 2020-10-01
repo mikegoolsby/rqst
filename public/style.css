@@ -1,8 +1,17 @@
 body {
-    background-color: black;
-    color: white;
+    background-color: #f0eeed;
+    color: black;
+}
+
+.form-control, .jumbotron {
+    background-color: #f0eeed;
+    color: black;
 }
 
 #failed {
     color: red;
+}
+
+.p2 {
+    width: 400px;
 }

@@ -5,9 +5,9 @@ class New extends React.Component {
     render() {
         return (
             <Layout>
-                <div class="form-control justify-content-center">
+                <div class="justify-content-center">
                     <h1>Enter a new time-off request:</h1>
-                    <form action="/home" method="POST">
+                    <form action="/rqst-go/main" method="POST">
                         <div class="form-group d-flex flex-column">
                             Name: <input type="text" class="col-auto" name="name" class="col-md-6"/>
                             Date: <input type="date" class="col-auto" name="date" class="col-md-6"/>

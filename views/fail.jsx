@@ -18,10 +18,10 @@ class Fail extends React.Component {
                         <input type="password" class="form-control col-sm-2" id="password" placeholder="Password"></input>
                         <p id="failed">Login failed. Please ensure you are using the correct username and password.</p>
                     </div>
-                </form>
                     <div>
                         <button type="submit" class="btn btn-primary">Login</button>
                     </div>
+                </form>
             </Layout>
         )
     }

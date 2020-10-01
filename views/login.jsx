@@ -17,10 +17,11 @@ class Login extends React.Component {
                         <label for="password" class="col-sm-2">Password</label>
                         <input type="password" class="form-control col-sm-2" id="password" placeholder="Password"></input>
                     </div>
-                </form>
                     <div>
                         <button type="submit" class="btn btn-primary">Login</button>
+                        <a href="/rqst-go"><button type="button" class="btn btn-warning">Signup</button></a>
                     </div>
+                </form>
             </Layout>
         )
     }

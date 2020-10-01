@@ -22,7 +22,7 @@ class Layout extends React.Component {
                         <a class="nav-link text-info" href="/rqst-go/new">Add New Request</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-info" href="#">Pending Requests</a>
+                        <a class="nav-link text-info" href="/rqst-go/pending">Pending Requests</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger" href="/logout">Log Out</a>
