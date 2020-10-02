@@ -1,6 +1,11 @@
 body {
     background-color: #f0eeed;
     color: black;
+    font-family: 'Abel', sans-serif;
+}
+
+li {
+    list-style-type: none;
 }
 
 .form-control, .jumbotron {

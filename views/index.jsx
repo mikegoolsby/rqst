@@ -7,7 +7,7 @@ class Index extends React.Component {
         const {request, index} = this.props
         return (
             <Layout>
-                <h3 class="d-flex justify-content-center">Approved Requests</h3>
+                <h2 class="d-flex justify-content-center">Approved Requests</h2>
                 <div class="d-flex flex-row">
                 {request.map((request, index) => {
                     let isPending = request.pending

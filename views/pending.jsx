@@ -1,12 +1,14 @@
 const React = require('react');
 const Layout = require('./Layout')
 const Request = require('../models/request')
+const methodOverride = require('method-override');
 
 class Pending extends React.Component {
     render() {
         const {request, index} = this.props
         return (
             <Layout>
+                <h2 class="d-flex justify-content-center">Pending Requests</h2>               
                 {request.map((request, index) => {
                     let isPending = request.pending
                     if (isPending === true) {
@@ -20,7 +22,7 @@ class Pending extends React.Component {
                                         <li class="card-text">Note: {request.note}</li>
                                         <br></br>
                                         <a href={`/rqst-go/${request._id}/edit`} class="btn btn-primary">Edit</a>
-                                        <form action={`/rqst-go/${index}?_method=DELETE`} method="post">
+                                        <form action={`/rqst-go/${request._id}?_method=DELETE`} method="POST">
                                             <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
                                         </form>
                                     </ul>

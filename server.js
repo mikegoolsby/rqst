@@ -10,6 +10,7 @@ const mongoose = require("mongoose")
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 
 // Require rqst Router
 const rqstRouter = require("./controllers/router");

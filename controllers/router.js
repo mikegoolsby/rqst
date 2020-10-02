@@ -12,7 +12,7 @@ const auth = (req, res, next) => {
     if (req.session.login) {
       next();
     } else {
-      res.status(400).send("NOT LOGGED IN");
+      res.status(400).render("fail");
     }
 };
 
@@ -56,7 +56,7 @@ router.get('/fail', (req, res) => {
 //LOGOUT
 router.get("/logout", (req, res) => {
     req.session.destroy();
-    res.redirect("/logout");
+    res.redirect('/rqst-go');
 });
 
 // Login POST request
@@ -86,6 +86,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
+
 // Index
 router.get('/main', auth, async (req, res) => {
     const userRequests = await Request.find({username: req.session.username})
@@ -94,8 +95,9 @@ router.get('/main', auth, async (req, res) => {
 
 
 // New
-router.get('/new' , (req, res) => {
-    res.render('new')
+router.get('/new', auth, async (req, res) => {
+    const userRequests = await Request.find({username: req.session.username})
+    res.render('new', {request: userRequests, username: req.session.username, data: Request})
 });
 
 // Create
@@ -127,20 +129,32 @@ router.get('/pending', auth, async (req, res) => {
 
 // Edit
 router.get('/:id/edit', auth, async (req, res) => {
-    const userRequests = await Request.find({username: req.session.username})
-    res.render('edit', {
-        request: userRequests, 
-        username: req.session.username, 
-        data: Request,
-        Request:Request[req.params.index],
-        index:req.params.index
-    })
+    try {
+        const gettingRequest = await Request.findById(req.params.id)
+        res.render('edit', {gettingRequest})
+    }
+    catch(error) {
+        console.log(error)
+    }
+})
+
+// Update
+router.put('/:id/edit', auth, async (req, res) => {
+    try {
+        req.body.username = req.session.username
+        await Request.findByIdAndUpdate(req.params.id, req.body)
+        res.redirect('/rqst-go/pending')
+    }
+    catch(error) {
+        console.log(error)
+    }
 })
 
 // Delete
-router.delete('/:index', (req, res) => {
-    Request.splice(req.params.index, 1)
-    res.redirect('/rqst-go/main')
+router.delete('/:id', (req, res) => {
+    Request.findByIdAndRemove(req.params.id, (error, data) => {
+        res.redirect('/rqst-go/pending')
+    })
 })
 
 

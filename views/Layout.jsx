@@ -7,6 +7,7 @@ class Layout extends React.Component {
             <head>
                 <title>{this.props.title}</title>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
+                <link href="https://fonts.googleapis.com/css2?family=Abel&family=Alef&display=swap" rel="stylesheet"></link>
                 <link rel="stylesheet" href="/style.css"></link>
             </head>
             <body>
@@ -25,11 +26,12 @@ class Layout extends React.Component {
                         <a class="nav-link text-info" href="/rqst-go/pending">Pending Requests</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger" href="/logout">Log Out</a>
+                        <a class="nav-link text-danger" href="/rqst-go/logout">Log Out</a>
                     </li>
                 </ul>
                 </div>
-                <h1 class="d-flex justify-content-center">RQST</h1>
+                <h1 class="d-flex justify-content-center">RQST &lt;GO&gt;</h1>
+                <hr style={{width:'50%'}}></hr>
                 <main>{this.props.children}</main>
             </body>
         </html>

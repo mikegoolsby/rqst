@@ -6,7 +6,8 @@ const Layout = require('./Layout')
 class Login extends React.Component {
     render() {
         return (
-            <Layout title="Login to RQST">
+            <Layout>
+                <h2 class="d-flex justify-content-center">Log In to RQST</h2>
                 <form action="/rqst-go/login" method="POST">
                     <div class="form-group">
                         <label for="username" class="col-sm-2">Username</label>
