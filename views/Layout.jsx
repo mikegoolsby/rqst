@@ -29,6 +29,7 @@ class Layout extends React.Component {
                     </li>
                 </ul>
                 </div>
+                <h1 class="d-flex justify-content-center">RQST</h1>
                 <main>{this.props.children}</main>
             </body>
         </html>

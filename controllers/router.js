@@ -1,4 +1,4 @@
-const {Router} = require('express');
+const {Router, request} = require('express');
 // require models
 const User = require('../models/user')
 const router = Router();
@@ -8,6 +8,13 @@ const bcrypt = require("bcryptjs");
 const Request = require('../models/request')
 
 ////// Auth Middleware //////
+const auth = (req, res, next) => {
+    if (req.session.login) {
+      next();
+    } else {
+      res.status(400).send("NOT LOGGED IN");
+    }
+};
 
 // Signup
 router.get('/', (req, res) => {
@@ -49,7 +56,7 @@ router.get('/fail', (req, res) => {
 //LOGOUT
 router.get("/logout", (req, res) => {
     req.session.destroy();
-    res.redirect("/");
+    res.redirect("/logout");
 });
 
 // Login POST request
@@ -57,6 +64,8 @@ router.post('/login', async (req, res) => {
     // Find user
     const user = await User.find({ username: req.body.username });
     // Check if user was found
+    console.log(user)
+    console.log(req.body)
     if (user.length > 0) {
         // Compare password
         const check = await bcrypt.compare(req.body.password, user[0].password);
@@ -66,7 +75,7 @@ router.post('/login', async (req, res) => {
             req.session.username = user[0].username;
             req.session.password = user[0].password;
             req.session.isManager = user[0].isManager;
-            res.redirect('/login');
+            res.redirect('/rqst-go/main');
         } else {
             // Redirect back to login page if failed
             res.render('fail');
@@ -78,9 +87,11 @@ router.post('/login', async (req, res) => {
 });
 
 // Index
-router.get('/main', (req, res) => {
-    res.render('index')
+router.get('/main', auth, async (req, res) => {
+    const userRequests = await Request.find({username: req.session.username})
+    res.render('index', {request: userRequests, username: req.session.username, data: Request})
 });
+
 
 // New
 router.get('/new' , (req, res) => {
@@ -88,19 +99,51 @@ router.get('/new' , (req, res) => {
 });
 
 // Create
-router.post('/', (req, res) => {
-    Request.create(req.body, (err, request) => {
-        res.redirect('/')
-    })
-    Request.create(req.body, (error, request) => {
-        res.redirect('/main')
+router.post('/main', auth, (req, res) => {
+    const newRequest = {
+        username: req.session.username,
+        name: req.body.name,
+        date: req.body.date,
+        bucket: req.body.bucket,
+        note: req.body.note,
+        pending: true
+    }
+    console.log(newRequest)
+
+    Request.create(newRequest, (error, req) => {
+        if (error) {
+            console.log(`Error: ${error}`);
+        } else {
+            res.redirect('/rqst-go/main')   
+        }
     })
 })
 
 // Pending
-router.get('/pending', (req, res) => {
-    res.render('pending')
+router.get('/pending', auth, async (req, res) => {
+    const userRequests = await Request.find({username: req.session.username})
+    res.render('pending', {request: userRequests, username: req.session.username, data: Request})
 })
+
+// Edit
+router.get('/:id/edit', auth, async (req, res) => {
+    const userRequests = await Request.find({username: req.session.username})
+    res.render('edit', {
+        request: userRequests, 
+        username: req.session.username, 
+        data: Request,
+        Request:Request[req.params.index],
+        index:req.params.index
+    })
+})
+
+// Delete
+router.delete('/:index', (req, res) => {
+    Request.splice(req.params.index, 1)
+    res.redirect('/rqst-go/main')
+})
+
+
 // router.get('/pending/:id/approve', (req, res) => {
 //     Request.findById(req.params.id, (err, request) => {
 //         request.pending = false;
@@ -114,5 +157,5 @@ router.get('/approve', (req, res) => {
     res.render('approve')
 })
 
-
-module.exports = router
+module.exports = auth;
+module.exports = router;

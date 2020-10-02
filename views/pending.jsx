@@ -1,11 +1,34 @@
 const React = require('react');
 const Layout = require('./Layout')
+const Request = require('../models/request')
 
 class Pending extends React.Component {
     render() {
+        const {request, index} = this.props
         return (
             <Layout>
-                <h1>pending requests here</h1>
+                {request.map((request, index) => {
+                    let isPending = request.pending
+                    if (isPending === true) {
+                        return (
+                            <div class="card w-50" id="index">
+                                <div class="card-body">
+                                    <ul key={index} >
+                                    <h5 class="card-title">{request.name}</h5>
+                                        <li class="card-text">Date: {request.date}</li>
+                                        <li class="card-text">Bucket #{request.bucket}</li>
+                                        <li class="card-text">Note: {request.note}</li>
+                                        <br></br>
+                                        <a href={`/rqst-go/${request._id}/edit`} class="btn btn-primary">Edit</a>
+                                        <form action={`/rqst-go/${index}?_method=DELETE`} method="post">
+                                            <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
+                                        </form>
+                                    </ul>
+                                </div>
+                            </div> 
+                        )
+                    }
+                })}
             </Layout>
         )
     }

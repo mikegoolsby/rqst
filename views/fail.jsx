@@ -7,7 +7,7 @@ class Fail extends React.Component {
     render() {
         return (
             <Layout title="Login to RQST">
-                <form>
+                <form action="/rqst-go/login" method="POST">
                     <div class="form-group">
                         <label for="username" class="col-sm-2">Username</label>
                         <input type="email" class="form-control col-sm-2" id="username" aria-describedby="emailHelp" placeholder="Enter email"></input>

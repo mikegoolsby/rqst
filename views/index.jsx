@@ -1,6 +1,5 @@
 const React = require('react')
 const seedData = require('../models/seedData')
-const Request = require('../models/request')
 const Layout = require('./Layout')
 
 class Index extends React.Component {
@@ -8,19 +7,24 @@ class Index extends React.Component {
         const {request, index} = this.props
         return (
             <Layout>
-                <h1 class="d-flex justify-content-center">RQST</h1>
+                <h3 class="d-flex justify-content-center">Approved Requests</h3>
                 <div class="d-flex flex-row">
-                {Request.map((request, index) => {
-                    return (
-                        <div class="row p-2" id="index">
-                        <ul key={index} >
-                        <h3>{request.name}</h3>
-                            <li>Date: {request.date}</li>
-                            <li>Bucket # {request.bucket}</li>
-                            <li>Note: {request.note}</li>
-                        </ul>
-                        </div> 
-                    )
+                {request.map((request, index) => {
+                    let isPending = request.pending
+                    if (isPending === false) {
+                        return (
+                            <div class="card w-50" id="index">
+                                <div class="card-body">
+                                    <ul key={index} >
+                                    <h5 class="card-title">{request.name}</h5>
+                                        <li class="card-text">Date: {request.date}</li>
+                                        <li class="card-text">Bucket #{request.bucket}</li>
+                                        <li class="card-text">Note: {request.note}</li>
+                                    </ul>
+                                </div>
+                            </div> 
+                        )
+                    }
                 })}
                 </div> 
             </Layout>

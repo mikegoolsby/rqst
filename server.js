@@ -12,7 +12,8 @@ const MongoStore = require("connect-mongo")(session);
 const methodOverride = require('method-override');
 
 // Require rqst Router
-const rqstRouter = require("./controllers/router")
+const rqstRouter = require("./controllers/router");
+const auth = require("./controllers/router");
 
 // Mongo setup
 mongoose.connect(`${MONGODB_URI}${DB_NAME}`, {
