@@ -34,7 +34,7 @@ app.use(
     session({
       secret: SECRET,
       resave: false,
-      saveUninitialized: true,
+      saveUninitialized: false,
       cookie: { secure: process.env.NODE_ENV === "production" },
       store: new MongoStore({ mongooseConnection: mongoose.connection}),
     })
