@@ -12,12 +12,12 @@ class Layout extends React.Component {
                 crossorigin="anonymous" defer></script>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
                 <link href="https://fonts.googleapis.com/css2?family=Abel&family=Alef&display=swap" rel="stylesheet"></link>
-                <link rel="stylesheet" href="/path/to/theme.default.css"></link>
+                {/* <link rel="stylesheet" href="/path/to/theme.default.css"></link>
 
                 <script type="text/javascript" src="/path/to/jquery-latest.js"></script>
-                <script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script>
+                <script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script> */}
                 <link rel="stylesheet" href="/style.css"></link>
-                <script src="jquery.bootgrid.js"></script>
+                {/* <script src="jquery.bootgrid.js"></script> */}
             </head>
             <body>
                 <header>
