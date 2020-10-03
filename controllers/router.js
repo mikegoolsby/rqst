@@ -80,7 +80,7 @@ router.post('/login', async (req, res) => {
             req.session.username = user[0].username;
             req.session.password = user[0].password;
             req.session.isManager = user[0].isManager;
-            res.redirect('/main');
+            res.redirect('/rqst-go/main');
         } else {
             // Redirect back to login page if failed
             res.render('fail');
@@ -91,6 +91,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Index
 router.get('/main', auth, async (req, res) => {
     Request.find({}, (err, request) => {
         res.render('index', {request})
@@ -160,16 +161,6 @@ router.delete('/:id', (req, res) => {
         res.redirect('/rqst-go/pending')
     })
 })
-
-
-// router.get('/pending/:id/approve', (req, res) => {
-//     Request.findById(req.params.id, (err, request) => {
-//         request.pending = false;
-//         Request.findByIdAndUpdate(req.params.id, request, () => {
-//             res.redirect('/pending')
-//         })
-//     })
-// })
 
 router.get('/approve', (req, res) => {
     res.render('approve')
