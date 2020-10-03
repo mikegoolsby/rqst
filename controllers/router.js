@@ -64,11 +64,16 @@ router.post('/login', async (req, res) => {
     // Find user
     const user = await User.find({ username: req.body.username });
     // Check if user was found
+    console.log('-------')
     console.log(user)
     console.log(req.body)
+    console.log('-------')
     if (user.length > 0) {
         // Compare password
         const check = await bcrypt.compare(req.body.password, user[0].password);
+        console.log('-------')
+        console.log(check)
+        console.log('-------')
         if (check) {
             // Save info in session, user is logged in & username
             req.session.login = true

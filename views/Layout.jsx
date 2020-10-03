@@ -37,6 +37,10 @@ class Layout extends React.Component {
                 <h1 class="d-flex justify-content-center">RQST &lt;GO&gt;</h1>
                 <hr style={{width:'50%'}}></hr>
                 <main>{this.props.children}</main>
+                <br></br>
+                <div class="d-flex justify-content-center">
+                    <footer>&copy;Created by M. Goolsby, 2020</footer>
+                </div>
             </body>
         </html>
         )
