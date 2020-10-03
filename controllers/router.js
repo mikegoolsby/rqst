@@ -9,7 +9,6 @@ const Request = require('../models/request')
 
 ////// Auth Middleware //////
 const auth = (req, res, next) => {
-    console.log(req.session)
     if (req.session.login) {
       next();
     } else {
@@ -31,10 +30,8 @@ router.post("/", async (req, res) => {
             password: req.body.password,
             isManager: req.body.gridRadios === "manager" ? true : false
         }
-        console.log(user)
         // encrypting password
         user.password = await bcrypt.hash(req.body.password, 10);
-        console.log(req.body.password)
         // Save new user to DB
         const newUser = await User.create(user);
         // Redirect back to login page
@@ -64,17 +61,9 @@ router.get("/logout", (req, res) => {
 router.post('/login', async (req, res) => {
     // Find user
     const user = await User.find({ username: req.body.username });
-    // Check if user was found
-    console.log('-------')
-    console.log(user)
-    console.log(req.body)
-    console.log('-------')
     if (user.length > 0) {
         // Compare password
         const check = await bcrypt.compare(req.body.password, user[0].password);
-        console.log('-------')
-        console.log(check)
-        console.log('-------')
         if (check) {
             // Save info in session, user is logged in & username
             req.session.login = true
