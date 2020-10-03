@@ -21,9 +21,9 @@ class Pending extends React.Component {
                                         <li class="card-text">Bucket #{request.bucket}</li>
                                         <li class="card-text">Note: {request.note}</li>
                                         <br></br>
-                                        <a href={`/rqst-go/${request._id}/edit`} class="btn btn-primary">Edit</a>
+                                        <a href={`/rqst-go/${request._id}/edit`} class="btn btn-outline-secondary">Edit</a>
                                         <form action={`/rqst-go/${request._id}?_method=DELETE`} method="POST">
-                                            <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
+                                            <button type="submit" class="btn btn-outline-danger" value="Delete">Delete</button>
                                         </form>
                                     </ul>
                                 </div>
