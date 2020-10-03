@@ -9,6 +9,7 @@ const Request = require('../models/request')
 
 ////// Auth Middleware //////
 const auth = (req, res, next) => {
+    console.log(req.session)
     if (req.session.login) {
       next();
     } else {
