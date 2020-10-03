@@ -80,7 +80,7 @@ router.post('/login', async (req, res) => {
             req.session.username = user[0].username;
             req.session.password = user[0].password;
             req.session.isManager = user[0].isManager;
-            res.redirect('/rqst-go/main');
+            res.redirect('/main');
         } else {
             // Redirect back to login page if failed
             res.render('fail');
