@@ -39,11 +39,10 @@ class Signup extends React.Component {
                         <a href="/rqst-go/login"><button type="button" class="btn btn-warning">Login</button></a>
                     </div>
                 </form>
-                <div class="jumbotron p-2">
+                <div class="d-flex flex-column justify-content-center jumbotron p-2">
                         <h1 class="display-4">Hi, there. Welcome to RQST.</h1>
-                        <p class="lead">This is a simple application that allows you to view available days to request off.</p>
+                        <p class="lead">This is a simple application that puts your time-off requests, approved days, and pending requests all in one place.</p>
                         <hr class="my-4"></hr>
-                        <p>Please leverage this website for requesting full days off, partial days, and viewing days that have been approved.</p>
                         <p class="lead"></p>
                 </div>
                 </div>
