@@ -86,12 +86,11 @@ router.post('/login', async (req, res) => {
     }
 });
 
-
-// Index
 router.get('/main', auth, async (req, res) => {
-    const userRequests = await Request.find({username: req.session.username})
-    res.render('index', {request: userRequests, username: req.session.username, data: Request})
-});
+    Request.find({}, (err, request) => {
+        res.render('index', {request})
+    })
+})
 
 
 // New

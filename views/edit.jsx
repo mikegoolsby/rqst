@@ -9,7 +9,6 @@ class Edit extends React.Component {
             <Layout>
                 <div class="justify-content-center">
                     <h1>Edit your request</h1>
-                    <small id="emailHelp" class="form-text text-muted">Note: please re-enter each field again.</small>
                     <form action={`/rqst-go/${gettingRequest._id}/edit/?_method=PUT`} method="POST">
                         <div class="form-group d-flex flex-column">
                             Name: <input type="text" class="col-md-6 form-control" name="name" defaultValue={gettingRequest.name}/>

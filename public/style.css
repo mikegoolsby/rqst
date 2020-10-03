@@ -20,3 +20,8 @@ li {
 .p2 {
     width: 400px;
 }
+
+table {
+    text-align: center;
+    width: 33%;
+}
